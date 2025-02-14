@@ -1,0 +1,51 @@
+---
+import Left1 from "@src/icons/left-1.astro";
+import Rigth2 from "@src/icons/rigth-2.astro";
+---
+
+<div class="w-full h-auto flex justify-between items-center">
+  <h1 class="text-2xl font-titan">LGsus</h1>
+  <div class="group">
+    <button
+      id="toggleSidebar"
+      class="size-9 overflow-hidden p-1 shadow-md shadow-black/[.4] border border-white rounded-xl group-hover:scale-105 group-active:scale-95 transition-all duration-100 ease-in-out"
+    >
+      <span class="size-full flex justify-center items-center text-black">
+        <Left1 id="leftIcon" class="size-full" />
+        <Rigth2 id="rightIcon" class="size-full" />
+      </span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("toggleSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const body = document.body;
+    const leftIcon = document.getElementById("leftIcon");
+    const rightIcon = document.getElementById("rightIcon");
+
+    if (!toggleButton || !sidebar || !body || !leftIcon || !rightIcon) return;
+
+    rightIcon.classList.add("hidden");
+    leftIcon.classList.add("block");
+
+    toggleButton.addEventListener("click", function () {
+      sidebar.classList.toggle("collapsed");
+      body.classList.toggle("collapsed");
+
+      if (sidebar.classList.contains("collapsed")) {
+        leftIcon.classList.remove("block");
+        leftIcon.classList.add("hidden");
+        rightIcon.classList.remove("hidden");
+        rightIcon.classList.add("block");
+      } else {
+        rightIcon.classList.remove("block");
+        rightIcon.classList.add("hidden");
+        leftIcon.classList.add("block");
+        leftIcon.classList.remove("hidden");
+      }
+    });
+  });
+</script>
