@@ -19,7 +19,7 @@ import Rigth2 from "@src/icons/rigth-2.astro";
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  function initSidebar() {
     const toggleButton = document.getElementById("toggleSidebar");
     const sidebar = document.getElementById("sidebar");
     const body = document.body;
@@ -28,24 +28,23 @@ import Rigth2 from "@src/icons/rigth-2.astro";
 
     if (!toggleButton || !sidebar || !body || !leftIcon || !rightIcon) return;
 
-    rightIcon.classList.add("hidden");
-    leftIcon.classList.add("block");
+    const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    sidebar.classList.toggle("collapsed", isCollapsed);
+    body.classList.toggle("collapsed", isCollapsed);
+    leftIcon.classList.toggle("hidden", isCollapsed);
+    rightIcon.classList.toggle("hidden", !isCollapsed);
 
-    toggleButton.addEventListener("click", function () {
-      sidebar.classList.toggle("collapsed");
-      body.classList.toggle("collapsed");
+    toggleButton.onclick = function () {
+      const collapsed = sidebar.classList.toggle("collapsed");
+      body.classList.toggle("collapsed", collapsed);
 
-      if (sidebar.classList.contains("collapsed")) {
-        leftIcon.classList.remove("block");
-        leftIcon.classList.add("hidden");
-        rightIcon.classList.remove("hidden");
-        rightIcon.classList.add("block");
-      } else {
-        rightIcon.classList.remove("block");
-        rightIcon.classList.add("hidden");
-        leftIcon.classList.add("block");
-        leftIcon.classList.remove("hidden");
-      }
-    });
-  });
+      leftIcon.classList.toggle("hidden", collapsed);
+      rightIcon.classList.toggle("hidden", !collapsed);
+
+      localStorage.setItem("sidebarCollapsed", String(collapsed));
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", initSidebar);
+  document.addEventListener("astro:after-swap", initSidebar);
 </script>
