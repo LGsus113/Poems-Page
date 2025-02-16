@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 import LogoLGsus from "@public/lgsus.webp";
 import "@fontsource/darumadrop-one";
 import "@fontsource/titan-one";
@@ -20,16 +22,21 @@ const { title, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href={LogoLGsus.src} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ClientRouter />
   </head>
-  <body class="w-full flex">
-    <aside id="sidebar" class="w-[440px] h-screen p-2">
+  <body>
+    <div
+      class="fixed top-0 left-0 -z-10 min-h-screen min-w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+    >
+    </div>
+    <aside id="sidebar">
       <slot name="aside" />
     </aside>
-    <div class="flex flex-col w-full h-auto">
+    <div class="content">
       <header>
         <slot name="header" />
       </header>
-      <main>
+      <main class="flex justify-center items-center">
         <slot name="main" />
       </main>
       <footer>
@@ -44,11 +51,37 @@ const { title, description } = Astro.props;
     font-family: "Darumadrop One", "Titan One", sans-serif;
   }
 
-  aside {
-    transition: width .3s ease;
+  body {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: 100vh;
+    transition: grid-template-columns 0.3s ease-in-out;
 
     &.collapsed {
-      width: 200px;
+      grid-template-columns: 200px 1fr;
+    }
+  }
+
+  aside {
+    height: 100vh;
+    padding: 8px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      display: none;
     }
   }
 </style>

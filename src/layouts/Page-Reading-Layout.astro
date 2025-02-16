@@ -1,0 +1,49 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+import LogoLGsus from "@public/lgsus.webp";
+import "@fontsource/titan-one";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const className = "w-full h-auto flex justify-center items-center";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={LogoLGsus.src} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <div
+      class="fixed top-0 left-0 -z-10 min-h-screen min-w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+    >
+    </div>
+    <header class={`${className} fixed top-0 left-0`}>
+      <slot name="header" />
+    </header>
+    <main class={className}>
+      <slot name="main" />
+    </main>
+    <footer class={className}>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
+
+<style>
+  html {
+    font-family: "Titan One", sans-serif;
+  }
+</style>

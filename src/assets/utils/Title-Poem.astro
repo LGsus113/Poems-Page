@@ -1,0 +1,15 @@
+---
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="py-7">
+  <h1
+    class="text-black text-4xl font-medium bg-clip-text text-transparent bg-[linear-gradient(90deg,_hsla(22,100%,78%,1)_0%,_hsla(2,78%,62%,1)_100%)]"
+  >
+    {title}
+  </h1>
+</div>

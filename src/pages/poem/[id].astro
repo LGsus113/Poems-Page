@@ -1,0 +1,42 @@
+---
+import ArticlePoem from "@src/assets/utils/Article-Poem.astro";
+import AtrasComponent from "@src/assets/utils/Atras-Component.astro";
+import Layout from "@src/layouts/Page-Reading-Layout.astro";
+import TitlePoem from "@src/assets/utils/Title-Poem.astro";
+
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const poems = await getCollection("poems");
+
+  const paths = poems.map((poem) => {
+    const { id } = poem;
+    const slug = id.replace(/\.[^/.]+$/, "");
+
+    return {
+      params: { id: slug },
+      props: { poem, slug },
+    };
+  });
+
+  return paths;
+}
+
+const { poem, slug } = Astro.props;
+const { data } = poem;
+const { title, description, img } = data;
+const { Content } = await render(poem);
+---
+
+<Layout title={title} description={description}>
+  <AtrasComponent slot="header" />
+  <section
+    class="w-auto h-auto flex flex-col items-center justify-center"
+    slot="main"
+  >
+    <TitlePoem title={title} />
+    <ArticlePoem img={img} slug={slug}>
+      <Content />
+    </ArticlePoem>
+  </section>
+</Layout>

@@ -1,8 +1,12 @@
 ---
 import Layout from "@src/layouts/Layout.astro";
 import AsideIndex from "@src/components/Aside/Aside-Index.astro";
+import HeaderIndex from "@src/components/Header/Header-Index.astro";
+import MainAstro from "@src/components/main/Main-Index.astro";
 ---
 
-<Layout title="Welcome to Astro." description="Astro description">
-  <AsideIndex slot={"aside"}/>
+<Layout title="LG-Letry" description="Poemas del alma para la lectura">
+  <AsideIndex slot={"aside"} />
+  <HeaderIndex slot={"header"} />
+  <MainAstro slot={"main"} />
 </Layout>

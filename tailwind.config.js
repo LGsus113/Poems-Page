@@ -1,14 +1,15 @@
+import typography from "@tailwindcss/typography";
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
       fontFamily: {
-        darumadrop: ["Darumadrop One", 'sans-serif'],
-        titan: ["Titan One", 'sans-serif'],
+        darumadrop: ["Darumadrop One", "sans-serif"],
+        titan: ["Titan One", "sans-serif"],
       },
     },
   },
-  plugins: [],
-}
-
+  plugins: [typography],
+};

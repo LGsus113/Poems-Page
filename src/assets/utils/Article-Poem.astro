@@ -1,0 +1,21 @@
+---
+interface Props {
+  img: string;
+  slug: string;
+}
+
+const { img, slug } = Astro.props;
+---
+
+<article class="w-[980px] h-auto justify-center flex gap-10">
+  <img
+    src={`/imgs/${img}`}
+    alt={img}
+    class="w-auto h-[530px] rounded-lg"
+    transition:name={`img-${slug}`}
+  />
+
+  <div class="w-1/3 font-sans text-base font-semibold flex flex-col gap-5">
+    <slot />
+  </div>
+</article>
