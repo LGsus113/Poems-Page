@@ -1,1 +1,26 @@
-<div class="flex-grow">jesus medina</div>
+---
+import GitLogo from "@src/icons/github.astro";
+---
+
+<div class="flex-grow">
+  <section>
+    <h1>Hola mundo</h1>
+  </section>
+  <section
+    class="flex flex-col justify-center items-center [&>*]:font-sans [&>*]:font-semibold [&>*]:text-gray-300"
+  >
+    <a
+      href="https://github.com/LGsus113"
+      target="_blank"
+      referrerpolicy="no-referrer"
+      class="group"
+    >
+      <div
+        class="w-auto h-auto flex gap-3 px-3 py-1 justify-center items-center text-lg bg-slate-800 border border-gray-300 rounded-full group-hover:border-white group-hover:text-white transition-all duration-150"
+      >
+        <GitLogo class="size-6" />
+        <span>GitHub</span>
+      </div>
+    </a>
+  </section>
+</div>
