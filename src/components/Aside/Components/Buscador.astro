@@ -1,0 +1,29 @@
+---
+import DivBgComplete from "@src/components/Aside/Components/Div-Bg-Complete.astro";
+import SearchIcon from "@src/icons/search.astro";
+
+const url = new URL(Astro.request.url);
+const searchParam = url.searchParams.get("search") || "";
+---
+
+<form method="get" action="/" class="w-full h-auto">
+  <DivBgComplete
+    className="w-full h-auto text-xl p-1 overflow-hidden flex-row group hover:shadow-black/[.4] transition-all duration-100 ease-in"
+  >
+    <input
+      type="text"
+      name="search"
+      id="search"
+      placeholder="Buscar"
+      value={searchParam}
+      class="size-full bg-transparent outline-none border-none placeholder:text-black/[.5] font-sans font-semibold group-focus-within:text-[#ffb77d] transition-all duration-100 ease-in"
+    />
+    <div
+      class="size-11 p-2 overflow-hidden flex justify-center items-center rounded-full shadow-inner shadow-black/[.3] group-hover:shadow-black/[.6] transition-all duration-100 ease-in"
+    >
+      <SearchIcon
+        class="size-7 rounded-full group-hover:scale-110 transition-all duration-100 ease-in group-focus-within:scale-110 group-focus-within:text-[#ffb77d]"
+      />
+    </div>
+  </DivBgComplete>
+</form>

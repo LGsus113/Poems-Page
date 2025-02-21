@@ -1,26 +1,44 @@
 ---
+import ButtonAside from "@src/assets/utils/Button-Aside.astro";
+import DivBgComplete from "@src/components/Aside/Components/Div-Bg-Complete.astro";
+import Buscador from "@src/components/Aside/Components/Buscador.astro";
+
 import GitLogo from "@src/icons/github.astro";
+
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
 ---
 
-<div class="flex-grow">
-  <section>
-    <h1>Hola mundo</h1>
-  </section>
+<div class="flex-grow flex flex-col gap-3 flex-wrap">
   <section
-    class="flex flex-col justify-center items-center [&>*]:font-sans [&>*]:font-semibold [&>*]:text-gray-300"
+    class="flex-grow flex flex-col justify-center items-center [&>*]:font-sans [&>*]:font-semibold [&>*]:text-black"
   >
-    <a
-      href="https://github.com/LGsus113"
-      target="_blank"
-      referrerpolicy="no-referrer"
-      class="group"
-    >
-      <div
-        class="w-auto h-auto flex gap-3 px-3 py-1 justify-center items-center text-lg bg-slate-800 border border-gray-300 rounded-full group-hover:border-white group-hover:text-white transition-all duration-150"
-      >
-        <GitLogo class="size-6" />
-        <span>GitHub</span>
-      </div>
-    </a>
+    <ButtonAside href="https://github.com/LGsus113" title="GitHub">
+      <GitLogo class="size-6" />
+    </ButtonAside>
   </section>
+
+  <div class="w-full h-auto flex flex-col gap-3">
+    <section
+      class="[&>*]:font-sans [&>*]:font-semibold [&>*]:text-lg flex flex-row justify-between items-center"
+    >
+      <DivBgComplete className="h-12 w-auto px-3 py-1">
+        <h1>Total de poemas</h1>
+      </DivBgComplete>
+      <DivBgComplete className="size-12 p-1">
+        <h1
+          class="rounded-full size-full font-normal shadow-inner shadow-black/[.3] flex justify-center items-center"
+        >
+          {total}
+        </h1>
+      </DivBgComplete>
+    </section>
+
+    <section class="w-full h-auto flex items-center justify-center">
+      <Buscador />
+    </section>
+  </div>
 </div>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  href: string;
+  title: string;
+}
+
+const { href, title } = Astro.props;
+---
+
+<a href={href} target="_blank" referrerpolicy="no-referrer" class="group">
+  <div
+    class="w-auto h-auto flex gap-3 px-3 py-1 justify-center items-center text-xl bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] rounded-xl shadow-md shadow-black/[.3] group-hover:scale-105 group-hover:shadow-black/[.6] group-active:scale-95 transition-all duration-150"
+  >
+    <slot />
+    <span>{title}</span>
+  </div>
+</a>

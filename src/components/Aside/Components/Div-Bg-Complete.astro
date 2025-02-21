@@ -1,0 +1,13 @@
+---
+interface Props {
+  className: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div
+  class={`flex ${className} items-center justify-center bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] rounded-lg shadow-md shadow-black/[.3]`}
+>
+  <slot />
+</div>

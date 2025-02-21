@@ -3,10 +3,33 @@ import Layout from "@src/layouts/Layout.astro";
 import AsideIndex from "@src/components/Aside/Aside-Index.astro";
 import HeaderIndex from "@src/components/Header/Header-Index.astro";
 import MainAstro from "@src/components/main/Main-Index.astro";
+
+import { getCollection } from "astro:content";
+
+const poems = await getCollection("poems");
+const poemsTotal = poems.length;
+
+const url = new URL(Astro.request.url);
+const searchParam = url.searchParams.get("search") || "";
+
+const poemsFiltered = poems.filter((poem) => {
+  const { data } = poem;
+  const { title, description, author } = data;
+  const searchValue = searchParam.toLowerCase();
+
+  return (
+    title.toLowerCase().includes(searchValue) ||
+    author.toLowerCase().includes(searchValue) ||
+    description.toLowerCase().includes(searchValue)
+  );
+});
 ---
 
 <Layout title="LG-Letry" description="Poemas del alma para la lectura">
-  <AsideIndex slot={"aside"} />
+  <AsideIndex slot={"aside"} total={poemsTotal} />
   <HeaderIndex slot={"header"} />
-  <MainAstro slot={"main"} />
+  <MainAstro slot={"main"} poems={poemsFiltered} />
+  <footer slot="footer">
+    <h1>{poemsFiltered.length}</h1>
+  </footer>
 </Layout>
