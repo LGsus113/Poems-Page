@@ -7,9 +7,10 @@ import GitLogo from "@src/icons/github.astro";
 
 interface Props {
   total: number;
+  filtro: number;
 }
 
-const { total } = Astro.props;
+const { total, filtro } = Astro.props;
 ---
 
 <div class="flex-grow flex flex-col gap-3 flex-wrap">
@@ -21,16 +22,24 @@ const { total } = Astro.props;
     </ButtonAside>
   </section>
 
-  <div class="w-full h-auto flex flex-col gap-3">
+  <div class="w-full h-auto flex flex-col gap-2">
     <section
-      class="[&>*]:font-sans [&>*]:font-semibold [&>*]:text-lg flex flex-row justify-between items-center"
+      class="[&>*]:font-sans [&>*]:font-semibold [&>*]:text-lg flex flex-row gap-2 justify-between items-center text-center"
     >
-      <DivBgComplete className="h-16 w-full justify-between px-3 py-1">
-        <h1>Total de poemas</h1>
+      <DivBgComplete className="h-auto w-full flex-col justify-between px-1 py-3 gap-2">
+        <h1>Total</h1>
         <h1
           class="rounded-lg text-2xl size-12 font-normal shadow-inner shadow-black/[.3] flex justify-center items-center"
         >
           {total}
+        </h1>
+      </DivBgComplete>
+      <DivBgComplete className="h-auto w-full flex-col justify-between px-1 py-3 gap-2">
+        <h1>Filtrados</h1>
+        <h1
+          class="rounded-lg text-2xl size-12 font-normal shadow-inner shadow-black/[.3] flex justify-center items-center"
+        >
+          {filtro}
         </h1>
       </DivBgComplete>
     </section>

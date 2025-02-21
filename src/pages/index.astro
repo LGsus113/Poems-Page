@@ -23,10 +23,11 @@ const poemsFiltered = poems.filter((poem) => {
     description.toLowerCase().includes(searchValue)
   );
 });
+const filteredTotal = poemsFiltered.length;
 ---
 
 <Layout title="LG-Letry" description="Poemas del alma para la lectura">
-  <AsideIndex slot={"aside"} total={poemsTotal} />
+  <AsideIndex slot={"aside"} total={poemsTotal} filtro={filteredTotal} />
   <HeaderIndex slot={"header"} />
   <MainAstro slot={"main"} poems={poemsFiltered} param={searchParam} />
   <footer slot="footer">

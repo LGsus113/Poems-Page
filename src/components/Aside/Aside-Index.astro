@@ -5,15 +5,16 @@ import Pie from "@src/components/Aside/Components/Pie-Aside.astro";
 
 interface Props {
   total: number;
+  filtro: number;
 }
 
-const { total } = Astro.props;
+const { total, filtro } = Astro.props;
 ---
 
 <div
   class="w-full h-full flex flex-col gap-3 p-3 rounded-xl shadow-inner shadow-black/[.4] bg-white bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(255,183,128)_100%)]"
 >
   <Encabezado />
-  <Cuerpo total={total} />
+  <Cuerpo total={total} filtro={filtro} />
   <Pie />
 </div>
