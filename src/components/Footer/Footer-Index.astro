@@ -1,0 +1,38 @@
+---
+import LinkGsus from "@src/assets/utils/Link-Gsus.astro";
+import AstroIcon from "@public/favicon.svg";
+
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
+const año = new Date().getFullYear();
+---
+
+<div
+  class="w-full h-full text-base font-sans font-medium flex gap-2 justify-center items-center border-t-2 outline-black/[.1]"
+>
+  <h1>
+    All rights reserved © - {total} poems | <LinkGsus /> - {año}
+  </h1>
+  <img src={AstroIcon.src} alt="Astro" class="size-6 rotate-y-180 invert" />
+</div>
+
+<style>
+  @keyframes rotateYAnimation {
+    0% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .rotate-y-180 {
+    animation: rotateYAnimation 3s infinite ease-in-out;
+  }
+</style>

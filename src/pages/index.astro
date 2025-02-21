@@ -3,6 +3,7 @@ import Layout from "@src/layouts/Layout.astro";
 import AsideIndex from "@src/components/Aside/Aside-Index.astro";
 import HeaderIndex from "@src/components/Header/Header-Index.astro";
 import MainAstro from "@src/components/main/Main-Index.astro";
+import FootterIndex from "@src/components/Footer/Footer-Index.astro";
 
 import { getCollection } from "astro:content";
 
@@ -30,7 +31,5 @@ const filteredTotal = poemsFiltered.length;
   <AsideIndex slot={"aside"} total={poemsTotal} filtro={filteredTotal} />
   <HeaderIndex slot={"header"} />
   <MainAstro slot={"main"} poems={poemsFiltered} param={searchParam} />
-  <footer slot="footer">
-    <h1>{poemsFiltered.length}</h1>
-  </footer>
+  <FootterIndex slot={"footer"} total={filteredTotal} />
 </Layout>
