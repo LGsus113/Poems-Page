@@ -8,21 +8,14 @@ import { getCollection, render } from "astro:content";
 
 const poems = await getCollection("poems");
 
-export async function getStaticPaths() {
-  return poems.map((poem) => {
-    const slug = poem.id.replace(/\.[^/.]+$/, "");
-
-    return {
-      params: { id: slug },
-    };
-  });
+const { id } = Astro.params;
+if (!id) {
+  throw new Error("ID del poema no encontrado.");
 }
 
-const { id } = Astro.params;
-const slug = id;
+const slug: string = id;
 
 const poem = poems.find((poem) => poem.id.replace(/\.[^/.]+$/, "") === slug);
-
 if (!poem) {
   throw new Error(`Poema con id "${id}" no encontrado.`);
 }
