@@ -28,7 +28,7 @@ const poemsFiltered = poems.filter((poem) => {
 <Layout title="LG-Letry" description="Poemas del alma para la lectura">
   <AsideIndex slot={"aside"} total={poemsTotal} />
   <HeaderIndex slot={"header"} />
-  <MainAstro slot={"main"} poems={poemsFiltered} />
+  <MainAstro slot={"main"} poems={poemsFiltered} param={searchParam} />
   <footer slot="footer">
     <h1>{poemsFiltered.length}</h1>
   </footer>

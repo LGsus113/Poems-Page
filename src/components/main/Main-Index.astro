@@ -1,46 +1,73 @@
 ---
 import TextIcon from "@src/icons/text-poem.astro";
-import TextTitle from "@src/assets/utils/Title-Icon.astro";
-import { getCollection } from "astro:content";
+import NotesOff from "@src/icons/notes-off.astro";
 
-const poems = await getCollection("poems");
+import TextTitle from "@src/assets/utils/Title-Icon.astro";
+
+interface PoemData {
+  title: string;
+  description: string;
+  author: string;
+  img: string;
+}
+
+interface Poem {
+  id: string;
+  data: PoemData;
+}
+
+interface Props {
+  poems: Poem[];
+  param: string;
+}
+
+const { poems, param } = Astro.props as Props;
 ---
 
-<div class="w-[1050px] flex flex-col items-center gap-5 mt-5">
+<div class="w-[1050px] flex flex-col items-center justify-center gap-5 mt-5">
   <TextTitle title="Poemas">
     <TextIcon class="size-6 text-black/[.5]" />
   </TextTitle>
   <div class="w-full h-auto flex flex-row flex-wrap gap-5">
     {
-      poems.map((poem) => {
-        const { id, data } = poem;
-        const { title, description, author, img } = data;
-        const slug = id.replace(/\.[^/.]+$/, "");
+      Array.isArray(poems) && poems.length > 0 ? (
+        poems.map((poem) => {
+          const { id, data } = poem;
+          const { title, description, author, img } = data;
+          const slug = id.replace(/\.[^/.]+$/, "");
 
-        return (
-          <a href={`/poem/${slug}`}>
-            <div class="group relative w-60 h-[410px] overflow-hidden rounded-lg border border-gray-500/[.5] shadow-lg shadow-black/[.4] transition-all duration-150 hover:border-black/[.5] hover:shadow-black/[.6]">
-              <div class="size-full rounded-lg shadow-inner shadow-gray-500/[.5] absolute z-10 top-0 left-0 p-3 flex flex-col gap-1 justify-end bg-gradient-to-t from-white via-white/75 to-transparent transition-all duration-150 group-hover:shadow-black/[.5]">
-                <h1 class="text-center font-serif text-lg font-semibold">
-                  {title}
-                </h1>
-                <p class="font-serif text-base font-normal opacity-70 text-left">
-                  {description}
-                </p>
-                <h3 class="text-right font-serif text-sm font-normal opacity-70 mt-5">
-                  {author}
-                </h3>
+          return (
+            <a href={`/poem/${slug}`}>
+              <div class="group relative w-60 h-[410px] overflow-hidden rounded-lg border border-gray-500/[.5] shadow-lg shadow-black/[.4] transition-all duration-150 hover:border-black/[.5] hover:shadow-black/[.6]">
+                <div class="size-full rounded-lg shadow-inner shadow-gray-500/[.5] absolute z-10 top-0 left-0 p-3 flex flex-col gap-1 justify-end bg-gradient-to-t from-white via-white/75 to-transparent transition-all duration-150 group-hover:shadow-black/[.5]">
+                  <h1 class="text-center font-serif text-lg font-semibold">
+                    {title}
+                  </h1>
+                  <p class="font-serif text-base font-normal opacity-70 text-left">
+                    {description}
+                  </p>
+                  <h3 class="text-right font-serif text-sm font-normal opacity-70 mt-5">
+                    {author}
+                  </h3>
+                </div>
+                <img
+                  src={`/imgs/${img}`}
+                  alt={title}
+                  class="size-full object-cover object-center rounded-lg group-hover:scale-105 transition-all duration-150 ease-in"
+                  transition:name={`img-${slug}`}
+                />
               </div>
-              <img
-                src={`/imgs/${img}`}
-                alt={slug}
-                class="size-full object-cover object-center rounded-lg group-hover:scale-105 transition-all duration-150 ease-in"
-                transition:name={`img-${slug}`}
-              />
-            </div>
-          </a>
-        );
-      })
+            </a>
+          );
+        })
+      ) : (
+        <div class="w-full h-auto flex gap-3 items-center justify-center p-1">
+          <NotesOff class="size-12" />
+          <h1 class="text-4xl font-sans font-normal">
+            Sin poemas encontrados para {param}
+          </h1>
+        </div>
+      )
     }
   </div>
 </div>

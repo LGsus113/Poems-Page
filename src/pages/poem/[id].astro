@@ -6,23 +6,27 @@ import TitlePoem from "@src/assets/utils/Title-Poem.astro";
 
 import { getCollection, render } from "astro:content";
 
-export async function getStaticPaths() {
-  const poems = await getCollection("poems");
+const poems = await getCollection("poems");
 
-  const paths = poems.map((poem) => {
-    const { id } = poem;
-    const slug = id.replace(/\.[^/.]+$/, "");
+export async function getStaticPaths() {
+  return poems.map((poem) => {
+    const slug = poem.id.replace(/\.[^/.]+$/, "");
 
     return {
       params: { id: slug },
-      props: { poem, slug },
     };
   });
-
-  return paths;
 }
 
-const { poem, slug } = Astro.props;
+const { id } = Astro.params;
+const slug = id;
+
+const poem = poems.find((poem) => poem.id.replace(/\.[^/.]+$/, "") === slug);
+
+if (!poem) {
+  throw new Error(`Poema con id "${id}" no encontrado.`);
+}
+
 const { data } = poem;
 const { title, description, img } = data;
 const { Content } = await render(poem);
